@@ -1,0 +1,57 @@
+[gd_scene load_steps=2 format=3 uid="uid://cj0cppakvcky0"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_gmflq"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_gmflq")
+
+[node name="Menu_Main" type="CanvasLayer" parent="."]
+
+[node name="MarginContainer" type="MarginContainer" parent="Menu_Main"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu_Main/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="Menu_Main/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.435294, 0, 0, 1)
+theme_override_font_sizes/font_size = 200
+text = "ROTR"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Start" type="Button" parent="Menu_Main/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 100
+text = "START"
+
+[node name="Settings" type="Button" parent="Menu_Main/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 100
+text = "SETTINGS"
+
+[node name="WeaponSystem" type="Button" parent="Menu_Main/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 100
+text = "WEAPON SYSTEM"
+
+[node name="Quit" type="Button" parent="Menu_Main/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 100
+text = "QUIT"
+
+[connection signal="pressed" from="Menu_Main/MarginContainer/VBoxContainer/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="Menu_Main/MarginContainer/VBoxContainer/WeaponSystem" to="." method="_on_weapon_system_pressed"]
+[connection signal="pressed" from="Menu_Main/MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

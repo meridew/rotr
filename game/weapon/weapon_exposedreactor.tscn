@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://cim66h1symil0"]
+
+[ext_resource type="Script" path="res://game/weapon/weapon_exposedreactor.gd" id="1_alw8w"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8bfeg"]
+
+[node name="Weapon_ExposedReactor" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+script = ExtResource("1_alw8w")
+radiation_color = Color(0.0196078, 0.352941, 0.0117647, 0.101961)
+
+[node name="DamageRadiusCollision" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_8bfeg")
+
+[node name="DamageRadiusCircle" type="Node2D" parent="DamageRadiusCollision"]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

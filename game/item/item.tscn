@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://bt5tx21xdtwxx"]
+
+[ext_resource type="Script" path="res://game/item/item.gd" id="1_raogw"]
+[ext_resource type="Texture2D" uid="uid://ca6xm4p22dl55" path="res://assets/sprites/item_poop.png" id="1_ux4r4"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_r8nit"]
+radius = 18.6667
+
+[node name="Item" type="Area2D" groups=["items", "xp"]]
+y_sort_enabled = true
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_raogw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_r8nit")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -2)
+texture = ExtResource("1_ux4r4")

@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://cv6eegilkksxb"]
+
+[ext_resource type="Script" path="res://game/weapon/weapon_electromagnet.gd" id="1_8g4cf"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ftkjw"]
+radius = 265.023
+
+[node name="Weapon_ElectroMagnet" type="Area2D"]
+collision_layer = 16
+collision_mask = 4
+monitorable = false
+script = ExtResource("1_8g4cf")
+
+[node name="Attration_Radius" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ftkjw")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]

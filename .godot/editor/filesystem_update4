@@ -1,0 +1,12 @@
+res://main.tscn
+res://assets/spriteframes/mob_monolith.tres
+res://game/game.tscn
+res://game/mob/mob.tscn
+res://game/menu/menu_pause.tscn
+res://game/level/level.tscn
+res://game/item/item.tscn
+res://game/player/player.tscn
+res://game/weapon/weapon_exposedreactor.tscn
+res://game/weapon/weapon_electromagnet.tscn
+res://game/weapon/weapon_laser.tscn
+res://testing/test.tscn
