@@ -337,6 +337,8 @@ size_flags_vertical = 3
 theme_override_font_sizes/font_size = 50
 text = "RETURN TO MENU"
 
+[node name="Mob_Spawner" type="Node2D" parent="."]
+
 [connection signal="ready" from="." to="Deug_Hud" method="_on_game_ready"]
 [connection signal="ready" from="." to="Menu_LevelUp" method="_on_game_ready"]
 [connection signal="player_levelup" from="Player" to="." method="_on_player_player_levelup"]
