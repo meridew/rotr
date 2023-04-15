@@ -3,7 +3,7 @@ extends Node2D
 # Export variables for editor customization
 @onready var mob_node = $"../Mobs"
 @onready var pool_mob = preload("res://game/mob/pool_mob.tscn")
-@export var pool_size = 1000
+@export var pool_size = 100
 
 # Internal variables
 var _mob_pool: Array = []
@@ -21,7 +21,6 @@ func _initialize_pool():
 		_mob_pool.append(mob_instance)
 		print("Added mob to pool. Pool size:", _mob_pool.size())
 		mob_node.add_child(mob_instance)
-
 
 func activate_mob():
 	if _mob_pool.size() > 0:

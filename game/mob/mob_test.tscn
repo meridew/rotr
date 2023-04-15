@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://c0bbnwd2684nw"]
+
+[ext_resource type="Script" path="res://game/mob/mob_test.gd" id="1_xffug"]
+[ext_resource type="SpriteFrames" uid="uid://k5pe2fmw8f8l" path="res://assets/spriteframes/mob_monolith.tres" id="2_dsbv2"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_eww2j"]
+radius = 11.0
+
+[node name="Mob_Test" type="Area2D"]
+script = ExtResource("1_xffug")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 14)
+shape = SubResource("CircleShape2D_eww2j")
+disabled = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("2_dsbv2")

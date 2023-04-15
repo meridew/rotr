@@ -1,7 +1,9 @@
+Area2D
+AnimatedSprite2D
+CollisionShape2D
+CharacterBody2D
 Timer
 Node2D
-CollisionShape2D
-Area2D
 ColorRect
 GridContainer
 HBoxContainer
@@ -12,14 +14,12 @@ Button
 Label
 MarginContainer
 CanvasLayer
-CharacterBody2D
 RigidBody2D
 Line2D
 AnimationPlayer
 ProgressBar
 CanvasModulate
 Sprite2D
-AnimatedSprite2D
 Camera2D
 ParallaxLayer
 ParallaxBackground

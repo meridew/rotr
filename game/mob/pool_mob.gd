@@ -47,15 +47,7 @@ func take_damage(damage_amount):
 		die()
 	else:
 		animation_player.play("flash")
-		
-func die():
-	drop_item()
-	velocity = Vector2(0,0)
-	_set_collision_shapes_enabled(false)
-	set_physics_process(false)
-	animated_sprite.play("death", true, 0)
-	disable()
-	
+			
 func drop_item():
 	var xp = item.instantiate()
 	xp.global_position = global_position
@@ -74,16 +66,19 @@ func move_to_new_position(player_position, player_direction, viewport_size):
 	
 	global_position = new_position
 
+func die():
+	set_physics_process(false)
+	drop_item()
+	animated_sprite.play("death", true, 0)
+	
 func enable():
-	animated_sprite.animation = "default"
-	visible = true
-	set_physics_process(true)
-	_set_collision_shapes_enabled(true)
 	_is_alive = true
+	set_physics_process(true)
+	animated_sprite.play("default")
 
 func disable():
 	_is_alive = false
-
+	
 func _set_collision_shapes_enabled(enabled: bool):
 	for child in get_children():
 		if child is CollisionShape2D:
@@ -91,6 +86,7 @@ func _set_collision_shapes_enabled(enabled: bool):
 
 func _on_animated_sprite_2d_animation_finished():
 	if animated_sprite.animation == "death":
+		disable()
 		emit_signal("death", self) # Pass self as an argument
 
 

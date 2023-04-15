@@ -20,3 +20,6 @@ res://game/mob/pool_mob.tscn
 res://class/mob_system.gd
 res://game/game.gd
 res://global.gd
+res://class/mob_spawner.gd
+res://game/mob/mob_test.tscn
+res://game/mob/mob_test.gd

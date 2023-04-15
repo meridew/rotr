@@ -365,7 +365,7 @@ text = "RETURN TO MENU"
 script = ExtResource("11_7kkpk")
 
 [node name="Spawn_Timer" type="Timer" parent="Mob_Pool"]
-wait_time = 0.1
+wait_time = 0.5
 autostart = true
 
 [connection signal="ready" from="." to="." method="_on_ready"]
