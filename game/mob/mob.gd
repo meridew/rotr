@@ -3,7 +3,6 @@ extends CharacterBody2D
 @onready var item = preload("res://game/item/item.tscn")
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var animation_player = $AnimationPlayer
-@onready var health_label = $Health
 
 var target_position = Vector2.ZERO
 var speed = 100
@@ -15,10 +14,10 @@ var mob_respawn_distance_range = 5000
 var viewport_rect = Rect2()
 
 func _ready():
-	health_label.text = str(health)
 	viewport_rect = get_viewport_rect()
 
 func _physics_process(delta: float) -> void:
+	
 	animated_sprite.flip_h = global_position.x > Global.player.global_position.x
 	
 	var viewport_size = viewport_rect.size
@@ -50,7 +49,6 @@ func take_damage(damage_amount):
 		animation_player.play("death")
 		drop_item()
 	else:
-		health_label.text = str(health)
 		animation_player.play("flash")
 
 func drop_item():
@@ -70,7 +68,3 @@ func move_to_new_position(player_position, player_direction, viewport_size):
 		new_position = player_position + (player_direction.rotated(random_angle) * viewport_size.length() * 1.2)
 	
 	global_position = new_position
-
-func _on_animated_sprite_2d_animation_finished():
-	queue_free()
-

@@ -16,13 +16,21 @@ signal update_hud(type)
 
 var mobs_in_range = []
 
-func _process(_delta):
+# player.gd
+func _physics_process(delta: float):
+	get_input()
+	move_and_slide()
+	handle_mobs_in_range()
+
+func handle_mobs_in_range():
 	if mobs_in_range:
 		var mobs_total_damage = 0
 		for mob in mobs_in_range:
-			mobs_total_damage += mob.damage
-		take_damage(mobs_total_damage)
-		animation_player.play("flash")
+			if mob._is_alive: # Check if the mob is alive before adding its damage
+				mobs_total_damage += mob.damage
+		if mobs_total_damage > 0:
+			take_damage(mobs_total_damage)
+			animation_player.play("flash")
 
 func get_input():
 	var input_direction = Input.get_vector("left", "right", "up", "down")
@@ -30,10 +38,6 @@ func get_input():
 	
 	if input_direction.x != 0:
 		animated_sprite.set_flip_h(input_direction.x < 0)
-		
-func _physics_process(_delta):
-	get_input()
-	move_and_slide()
 	
 func level_up():
 	max_xp = max_xp * 1.2
@@ -51,22 +55,24 @@ func add_xp(area):
 	emit_signal("update_hud","xp")
 
 func take_damage(amount):
-	if(Global.player_damage_timer.is_stopped()):
+	if(damage_timer.is_stopped()):
 		hp -= amount
 		if hp <= 0:
 			player_died()
 		emit_signal("update_hud","hp")
-		Global.player_damage_timer.start()	
+		damage_timer.start()
 
 func player_died():
 	get_tree().paused = true
 	Global.game_over.visible = true
 
 func _on_damage_area_body_entered(body):
-	mobs_in_range.append(body)
+	if(body.is_in_group('mobs')):
+		mobs_in_range.append(body)
 
 func _on_damage_area_body_exited(body):
-	mobs_in_range.erase(body)
+	if(body.is_in_group('mobs')):
+		mobs_in_range.erase(body)
 
 func _on_pickup_area_area_entered(area):
 	add_xp(area)

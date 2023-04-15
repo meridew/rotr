@@ -1,15 +1,20 @@
-[gd_scene load_steps=16 format=3 uid="uid://npur6sx76elc"]
+[gd_scene load_steps=19 format=3 uid="uid://npur6sx76elc"]
 
 [ext_resource type="Script" path="res://game/game.gd" id="1_5tq4r"]
-[ext_resource type="PackedScene" uid="uid://ce3vtkmksbgsn" path="res://game/level/level.tscn" id="1_m8lhg"]
 [ext_resource type="PackedScene" uid="uid://hh1gbksu1uoc" path="res://game/player/player.tscn" id="2_ol85g"]
 [ext_resource type="PackedScene" uid="uid://cim66h1symil0" path="res://game/weapon/weapon_exposedreactor.tscn" id="3_c3pw5"]
 [ext_resource type="Theme" uid="uid://bpx2rgbaeu08" path="res://themes/grid_theme.tres" id="3_g6axv"]
+[ext_resource type="Script" path="res://game/level/level.gd" id="4_a67pm"]
 [ext_resource type="PackedScene" uid="uid://cv6eegilkksxb" path="res://game/weapon/weapon_electromagnet.tscn" id="5_0vwjd"]
+[ext_resource type="Texture2D" uid="uid://04rpwpth35i8" path="res://assets/sprites/floor_desert.png" id="5_emp0a"]
 [ext_resource type="Script" path="res://game/hud/hud.gd" id="6_8q1s1"]
 [ext_resource type="PackedScene" uid="uid://0sqbfxf2vxg3" path="res://game/weapon/weapon_laser.tscn" id="6_ba31o"]
 [ext_resource type="Script" path="res://game/menu/menu_levelup.gd" id="8_oy14h"]
 [ext_resource type="Script" path="res://_debug/debug_hud.gd" id="8_ts8a7"]
+[ext_resource type="Script" path="res://class/mob_system.gd" id="11_7kkpk"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rv43j"]
+radius = 500.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n5dwq"]
 bg_color = Color(0.435294, 0, 0, 0.584314)
@@ -109,7 +114,30 @@ layout_mode = 2
 size_flags_horizontal = 3
 columns = 5
 
-[node name="Level" parent="." instance=ExtResource("1_m8lhg")]
+[node name="Level" type="Node2D" parent="."]
+visible = false
+script = ExtResource("4_a67pm")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="Level"]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="Level/ParallaxBackground"]
+motion_mirroring = Vector2(1920, 1080)
+
+[node name="Sprite2D" type="Sprite2D" parent="Level/ParallaxBackground/ParallaxLayer"]
+texture = ExtResource("5_emp0a")
+centered = false
+
+[node name="MobSpawner" type="Timer" parent="Level/ParallaxBackground"]
+wait_time = 0.001
+
+[node name="SpawnArea" type="Area2D" parent="Level"]
+collision_layer = 0
+collision_mask = 0
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/SpawnArea"]
+shape = SubResource("CircleShape2D_rv43j")
 
 [node name="Items" type="Node2D" parent="."]
 
@@ -117,10 +145,6 @@ columns = 5
 
 [node name="Mobs" type="Node2D" parent="."]
 y_sort_enabled = true
-
-[node name="Player_Damage_Timer" type="Timer" parent="."]
-wait_time = 0.1
-one_shot = true
 
 [node name="Player" parent="." instance=ExtResource("2_ol85g")]
 
@@ -337,10 +361,18 @@ size_flags_vertical = 3
 theme_override_font_sizes/font_size = 50
 text = "RETURN TO MENU"
 
-[node name="Mob_Spawner" type="Node2D" parent="."]
+[node name="Mob_Pool" type="Node2D" parent="."]
+script = ExtResource("11_7kkpk")
 
+[node name="Spawn_Timer" type="Timer" parent="Mob_Pool"]
+wait_time = 0.1
+autostart = true
+
+[connection signal="ready" from="." to="." method="_on_ready"]
 [connection signal="ready" from="." to="Deug_Hud" method="_on_game_ready"]
 [connection signal="ready" from="." to="Menu_LevelUp" method="_on_game_ready"]
+[connection signal="ready" from="." to="Mob_Pool" method="_on_game_ready"]
+[connection signal="timeout" from="Level/ParallaxBackground/MobSpawner" to="Level" method="_on_mob_spawner_timeout" flags=18]
 [connection signal="player_levelup" from="Player" to="." method="_on_player_player_levelup"]
 [connection signal="player_levelup" from="Player" to="Menu_LevelUp" method="_on_player_player_levelup"]
 [connection signal="update_hud" from="Player" to="." method="_on_player_update_hud"]
@@ -351,3 +383,4 @@ text = "RETURN TO MENU"
 [connection signal="pressed" from="Menu_Pause/MarginContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="Menu_Pause/MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
 [connection signal="pressed" from="Game_Over/MarginContainer/VBoxContainer/Return" to="." method="_on_return_pressed"]
+[connection signal="timeout" from="Mob_Pool/Spawn_Timer" to="Mob_Pool" method="_on_spawn_timer_timeout"]

@@ -17,6 +17,7 @@ func _ready():
 	Global.menu_pause = $Menu_Pause
 	Global.game_over = $Game_Over
 	Global.armoury = WeaponSystem.Armoury.new()
+	Global.viewport_size = get_viewport_rect().size
 
 func _input(event):
 	if event.is_action_pressed("escape"):

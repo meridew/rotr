@@ -1,7 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://b0pwl5spaoykm"]
+[gd_scene load_steps=8 format=3 uid="uid://r2cdge2c3aaj"]
 
-[ext_resource type="Script" path="res://game/mob/mob.gd" id="1_7cr3l"]
-[ext_resource type="SpriteFrames" uid="uid://k5pe2fmw8f8l" path="res://assets/spriteframes/mob_monolith.tres" id="2_buunm"]
+[ext_resource type="Script" path="res://game/mob/pool_mob.gd" id="1_d88pv"]
+[ext_resource type="SpriteFrames" uid="uid://k5pe2fmw8f8l" path="res://assets/spriteframes/mob_monolith.tres" id="2_mv5ke"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hw3ph"]
 radius = 15.1327
@@ -49,11 +49,11 @@ _data = {
 "show": SubResource("Animation_8jjih")
 }
 
-[node name="Mob" type="CharacterBody2D" groups=["mobs"]]
+[node name="Pool_Mob" type="CharacterBody2D" groups=["mobs"]]
 y_sort_enabled = true
 collision_layer = 2
 collision_mask = 2
-script = ExtResource("1_7cr3l")
+script = ExtResource("1_d88pv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 y_sort_enabled = true
@@ -62,8 +62,7 @@ shape = SubResource("CircleShape2D_hw3ph")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 y_sort_enabled = true
-sprite_frames = ExtResource("2_buunm")
-animation = &"death"
+sprite_frames = ExtResource("2_mv5ke")
 autoplay = "default"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://game/weapon/weapon_electromagnet.gd" id="1_8g4cf"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ftkjw"]
-radius = 265.023
+radius = 131.46
 
 [node name="Weapon_ElectroMagnet" type="Area2D"]
 collision_layer = 16

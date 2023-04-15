@@ -19,5 +19,6 @@ var debug_hud: CanvasLayer
 var debug_info: CanvasLayer
 var game_over: CanvasLayer
 var player_damage_timer: Timer
+var viewport_size: Vector2
 var weapon_system: WeaponSystem
 var armoury
